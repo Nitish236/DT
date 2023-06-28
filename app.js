@@ -1,8 +1,10 @@
 require("express-async-errors");
+require("dotenv")
 
 const express = require("express");
 const app = express();
 
+// Function to connect to the database
 const {connectToDatabase} = require("./database/connection");
 
 // Importing Routers
@@ -22,8 +24,10 @@ app.use(express.json());
 app.use("/api/v3/app", event);
 
 
-// Middleware
+// Checks if the route exists or not
 app.use(notFoundMiddleware);
+
+// handles error
 app.use(errorHandlerMiddleware);
 
 
@@ -32,8 +36,8 @@ async function startServer() {
     try {
         await connectToDatabase();
         
-        app.listen(3000, ()=>{
-            console.log("Server listening on port 3000");
+        app.listen(process.env.PORT, ()=>{
+            console.log(`Server listening on port ${process.env.PORT}`);
         })
     } catch (error) {
         console.log("Error -- ", error)

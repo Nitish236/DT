@@ -9,7 +9,7 @@ const DB_URI = "mongodb+srv://"+process.env.DB_USER+":"+process.env.DB_PASS+"@"+
 // DB Instance
 let db;
 
-async function connectToDatabase(){
+async function connectToDatabase() {
     try {
         const client = await MongoClient.connect(DB_URI, { useUnifiedTopology: true });
         db = client.db(process.env.DB_Name);
@@ -21,7 +21,7 @@ async function connectToDatabase(){
     }
 }
 
-function getDB(){
+function getDB() {           // Get DB instance
     return db;
 }
 
